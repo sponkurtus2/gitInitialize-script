@@ -5,24 +5,29 @@ ask_git_url() {
 
 github_remote_add_origin=$(ask_git_url)
 
-# 1-> git init
-git init
+if [ -n "$github_remote_add_origin" ; then
 
-# 2-> git add .
-git add .
+	# 1-> git init
+	git init
 
-# 3-> git commit -m "Automated message by my ^^"
-git commit -m "Automated message by Carlitos ^^"
+	# 2-> git add .
+	git add .
 
-# 4 -> git branch -M main
-git branch -M main
+	# 3-> git commit -m "Automated message by my ^^"
+	git commit -m "Automated message by Carlitos ^^"
 
-# git remote add origin <my-git-url>
-# gitCommand="git remote add origin"
-$github_remote_add_origin
+	# 4 -> git branch -M main
+	git branch -M main
 
-# And git push
-git push -u origin main
+	# git remote add origin <my-git-url>
+	$github_remote_add_origin
 
-# Exit
-gum spin --spinner dot --title "Done, now leaving" -- sleep 2
+	# And git push
+	git push -u origin main
+
+	# Exit
+	gum spin --spinner dot --title "Done, now leaving" -- sleep 2
+	exit
+fi
+gum spin --spinner dot --title "Not valid option, now leaving..." -- sleep 2
+exit
